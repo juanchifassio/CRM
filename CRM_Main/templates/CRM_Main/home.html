@@ -1,0 +1,52 @@
+{% extends 'CRM_Main/base.html' %}
+
+{% block title %}CRM - Home Page{% endblock%}
+
+
+
+{% block content_authenticated %}
+<div class='mt-5'>
+    
+    <legend class='border-bottom mb-4'><h1>Agents Status</h1></legend>
+    <h5>Total Agents: {{ nr_agents }} </h5>
+</div>
+<div class='mt-5'>
+    <legend class='border-bottom mb-4'><h1>Leads Status</h1></legend>
+    <h5>Total Leads: {{nr_leads}}</h5>
+    <div class='ms-5'>
+        <p>Assigned</p>
+        <ul class='ms-5'>
+            <li>Assigned: {{nr_assigned}}  of {{nr_leads}}</li>
+            <li>Unassigned: {{nr_unassigned}}  of {{nr_leads}}</li>
+        </ul>
+        <p >By Status</p>
+        <ul class='ms-5'>
+            <li>Open: {{nr_open}} of {{nr_leads}}</li>
+            <li>Working: {{nr_working}} of {{nr_leads}}</li>
+            <li>Customer: {{nr_customers}} of {{nr_leads}}</li>
+            <li>Nurture: {{nr_nurture}} of {{nr_leads}}</li>
+            <li>Inactive: {{nr_inactive}} of {{nr_leads}}</li>
+        </ul>
+    </div>
+</div>
+{% endblock%}
+
+
+
+
+
+
+
+
+
+{% block login %}
+<div class='mt-5'>
+<form method='POST' class='form-group'>
+    {% csrf_token %}
+    {{ form }}
+    <div class='mt-3'>
+    <button type='submit' class='btn btn-success'>Login</button>
+    </div>
+</form>
+</div>
+{% endblock%}

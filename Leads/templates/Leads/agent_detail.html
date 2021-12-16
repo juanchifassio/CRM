@@ -1,0 +1,55 @@
+{% extends 'CRM_Main/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}CRM - Agent: {{agent.first_name}} {{agent.last_name}} {% endblock %}
+
+
+
+{% block content_authenticated%}
+<div class='d-flex flex-row bd-highlight mb-4 mt-5'>
+  <div >
+    <img class="rounded-circle account-img" src="{{ agent.image.url }}" width="150" height="150">
+  </div>
+  <div class='ms-5 mt-5'>
+    <h1>   {{agent.first_name}} {{agent.last_name}}</h1>
+  </div>
+</div>
+<legend class='border-bottom mb-4'>Agent Info</legend>
+<p>Full Name:      {{agent.first_name}} {{agent.last_name}}</p>
+<p>Email:         {{agent.email}}</p>
+<p>Phone Number:  {{agent.phone}}</p>
+<div class='mb-4 mt-3'>
+  <a href="/agents/{{agent.pk}}/edit"><button class='btn btn-success' onclick="">Edit</button></a>
+</div>
+
+<legend class='border-bottom mb-4'>Leads in charge: {{nr_of_leads}}</legend>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Address</th>
+              <th scope="col">Email</th>
+              <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+
+          {% for lead in leads %}
+            <tr>
+              <td>{{ lead.first_name }}</td>
+              <td>{{ lead.last_name }}</td>
+              <td>{{ lead.address }}</td>
+              <td>{{ lead.email }}</td>
+              <td>{{ lead.status }}</td>
+              <td><a href="/leads/{{lead.pk}}"><button class='btn btn-success'>View</button></a></td>
+            </tr>
+          {% endfor %}
+        <tbody>
+</div>
+
+
+{% endblock%}

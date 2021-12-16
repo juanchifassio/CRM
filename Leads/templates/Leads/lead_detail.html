@@ -1,0 +1,33 @@
+{% extends 'CRM_Main/base.html' %} 
+
+{% load crispy_forms_tags %} 
+
+{% block title %}CRM - Lead: {{lead.first_name}} {{lead.last_name}} {% endblock %}
+
+{% block content_authenticated%}
+<div>
+    <div class='d-flex flex-row bd-highlight mb-4'>
+      <div class='ms-5 mt-4'>
+        <h1>{{lead.first_name}} {{lead.last_name}}</h1>
+      </div>
+    </div>
+    <legend class='border-bottom mb-4'>Lead Info</legend>
+    <p>Full Name:      {{lead.first_name}} {{lead.last_name}}</p>
+    <p>Email:         {{lead.email}}</p>
+    <p>Phone Number:  {{lead.phone}}</p>
+    <p>Address: {{lead.address}}</p>
+    <p>Birthday: {{lead.birthday}}</p>
+    <p>Description: {{lead.description}}</p>
+    <p>Agent: <a href="/agents/{{agent.pk}}">{{lead.agent}}</a></p>
+    <div class='mb-4 mt-3'>
+        <a href="/leads/{{lead.pk}}/edit">
+          <button class="btn btn-success" onclick="">Edit</button>
+        </a>
+    </div>
+</div>
+{% endblock%}
+
+
+
+
+

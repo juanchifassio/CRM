@@ -1,0 +1,110 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock%}</title>
+</head>
+<footer class="bg-dark bd-footer text-center text-white position-absolute bottom-0 w-100 pe-10">
+  <div class="text-center p-3" >
+    © 2020 Juan Martin Fassio
+  </div>
+</footer>
+<body class='bg-light'>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white ">
+          <div class="container">
+            <div class='h1'>
+            <a class="navbar-brand  " href="/home">
+              CRM
+            </a>
+          </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <div class='mt-4 me-3'>
+                  <h5>
+                    <a class="nav-item nav-link text-white" href="/agents">Agents</a>
+                  </h5>
+                </div>
+                <div class='mt-4 me-3'>
+                  <h5>
+                    <a class="nav-item nav-link text-white" href="/leads">Leads</a>
+                  </h5>
+                </div>
+                <li class="nav-item dropdown">
+                  <img class="rounded-circle account-img btn dropdown-toggle" src="{{ user.image.url }}" alt="dropdown image" data-bs-toggle="dropdown" class="img-responsive" aria-expanded="false" width="120" height="100">
+                  <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                  </ul>
+                </li>
+                {% else %}
+
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div id='content', name='content' >
+   
+    <main role="main" class="container">
+      <div class="row">
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} mt-5">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          {% block content %}
+          {% endblock%}
+
+          {% if user.is_authenticated %}
+            {% block content_authenticated%}
+
+            {% endblock%}
+
+            {% block content_authenticated1 %}
+
+            {% endblock%}
+
+
+          {% else %}
+            {% block login %}
+
+            {% endblock%}
+
+            {% block logout %}
+
+            {% endblock%}
+
+            {% block register %}
+
+            {% endblock%}
+          {% endif %}
+
+      </div>
+    </main>
+
+
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+  </body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends 'CRM_Main/base.html' %}
+
+{% block title %}CRM - Login {% endblock%}
+
+
+
+
+
+
+
+{% block login %}
+<div class='mt-5'>
+<form method='POST' class='form-group'>
+    {% csrf_token %}
+    {{ form }}
+    <div class='mt-3'>
+    <button type='submit' class='btn btn-success'>Login</button>
+</div>
+</form>
+</div>
+{% endblock%}

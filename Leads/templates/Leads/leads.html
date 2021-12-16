@@ -1,0 +1,73 @@
+{% extends 'CRM_Main/base.html' %}
+
+{% block title %}CRM - Leads {% endblock%}
+
+
+{% block content_authenticated%}
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Address</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Agent</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+      {% for lead in leads %}
+      {% if lead.agent != null %} 
+      <tr>
+          <td>{{ lead.first_name }}</td>
+          <td>{{ lead.last_name }}</td>
+          <td>{{ lead.address }}</td>
+          <td>{{ lead.email }}</td>
+          <td>{{ lead.status }}</td>
+          <td>{{ lead.agent.email }}</td>
+          <td><a href="/leads/{{lead.pk}}"><button class='btn btn-success'>View</button></a></td>
+          <td><a href="/leads/{{lead.pk}}/edit"><button class='btn btn-success' onclick="">Edit</button></a></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      </tbody>
+</div>
+
+
+  <div class='mt-5'>
+    <h1 >Unassigned Leads</h1>
+  </div>  
+  <div class='container-fluid mt-5 mb-5'>
+    <div class='row'>
+      <div class=" d-flex justify-content-center">        
+        {% for lead in leads %}
+        {% if lead.agent == null %} 
+          <div class="card ms-3" style="width: 50rem; ">
+            <div class="card-body">
+              <div class="row align-items-start">
+                <div class="col">
+                  <h5 class="card-title">{{ lead.first_name }} {{ lead.last_name }}</h5>
+                </div>
+              </div>
+              <div class="row align-items-start">
+                <div class="col">
+                  <p class="card-text">{{lead.description}}</p>
+                  <a href="/leads/{{lead.pk}}/edit" class="btn btn-primary stretched-link">Assign Agent</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class='mt-5'>
+      <h1>Leads</h1>
+      <a href="/leads/create_lead">Create new Lead</a>
+    </div> 
+  </div> 
+{% endblock%}
+
